@@ -1,0 +1,36 @@
+# Free demo configuration. Free-tier limits and availability can change.
+services:
+  - type: web
+    name: skillsync
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/ready
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: AUTH_COOKIE_SECURE
+        value: "true"
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.1-flash-lite
+      - key: GEMINI_EMBEDDING_MODEL
+        value: gemini-embedding-001
+      - key: AI_TIMEOUT_SECONDS
+        value: "120"
+      - key: RESUME_STORAGE_DIR
+        value: /tmp/skillsync-resumes
+      - key: RAG_EMBEDDING_DIMENSIONS
+        value: "768"
+      - key: RAG_VECTOR_BACKEND
+        value: pgvector
+      - key: LOG_LEVEL
+        value: INFO
